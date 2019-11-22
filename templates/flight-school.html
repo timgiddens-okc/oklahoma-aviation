@@ -1,0 +1,323 @@
+{% extends "_layout" %}
+{% set callToAction = "gold" %}
+{% set active = "Flight School" %}
+{% block content %}
+
+	<div class="banner flight-school" style="background: url({{ entry.banner.one().url }}) center center no-repeat;">
+		<div class="banner-content">		
+			<h3 class="white">{{ entry.bannerHeader|nl2br }}</h3>
+		</div>
+		<div class="overlay"></div>
+	</div>
+	
+	<section class="flight-school-intro">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 cell text-center">
+					<h4>{{ entry.header|nl2br }}</h4>
+					{{ entry.body }}
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="grey no-padding-top fleet">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				{% for this in entry.iconBlocks %}
+				<div class="small-12 medium-4 cell">
+					<div class="info-text">
+						{% if this.icon.one() is not null %}
+						<div class="icon" style="background: url({{ this.icon.one().url }}) center center no-repeat;"></div>
+						{% else %}
+						<div class="icon"></div>
+						{% endif %}
+						<div class="subheader">{{ this.subHeader }}</div>
+						<h2>{{ this.header }}</h2>
+						<div class="line"></div>
+						{{ this.text }}
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+	
+	<section class="testimonials" style="background: url({{ entry.image2.one().url }}) center center no-repeat;">
+		<div class="grid-container">
+			<div class="grid-x">
+				<div class="small-12 cell">
+					<div class="slideshow">
+					{% for this in craft.entries.section('testimonials').order('RAND()').all() %}
+						<div class="text-center">
+							<div class="white">{{ this.body }}</div>
+							<h6 class="white">{{ this.title }}</h6>
+						</div>
+					{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section id="courses">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x hide-for-small-only">
+				<div class="small-12 cell text-center">
+					<h3 class="subline">View Our Courses</h3>
+					<div class="course-nav">
+						{% for this in craft.categories.group('courseType').all() %}
+							<a href="#{{ this.slug }}" class="{{ (loop.first) ? 'active' : '' }}">{{ this.title }}</a>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="grid-x grid-padding-x hide-for-small-only">
+				<div class="small-12 cell">
+					{% for this in craft.categories.group('courseType').all() %}
+						<div id="{{ this.slug }}" class="course-category">
+							<div class="courses">
+								
+								{% for course in craft.entries.section('courses').relatedTo(this).all() %}
+								<div class="course">
+									<div class="grid-x grid-padding-x">
+										<div class="small-12 medium-6 cell">
+											<div class="text">
+												<h2>{{ course.title }}</h2>
+												{{ course.body }}
+												<div class="show-for-small-only">
+													<div class="subheader">Objective</div>
+													{{ course.objectives }}
+													<div class="subheader">Prerequisites</div>
+													<div class="prerequisites">{{ course.prerequisites }}</div>
+												</div>
+												<a href="#form" class="button">Apply</a>
+											</div>
+										</div>
+										<div class="hide-for-small-only medium-6 cell">
+											<div class="objective">
+												<div class="subheader">Objective</div>
+												{{ course.objectives }}
+												<div class="subheader">Prerequisites</div>
+												<div class="prerequisites">{{ course.prerequisites }}</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+								
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+			{% for this in craft.categories.group('courseType').all() %}
+			<div class="grid-x hide-for-medium mobile-courses">
+				<div class="small-12 cell">
+					<h3 class="main-title">{{ this.title }}</h3>
+					<div class="courses">
+						{% for course in craft.entries.section('courses').relatedTo(this).all() %}
+						<div class="course">
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<div class="text">
+										<h2>{{ course.title }}</h2>
+										{{ course.body }}
+										<div class="show-for-small-only">
+											<div class="subheader">Objective</div>
+											{{ course.objectives }}
+											<div class="subheader">Prerequisites</div>
+											<div class="prerequisites">{{ course.prerequisites }}</div>
+										</div>
+										<a href="#form" class="button">Apply</a>
+									</div>
+								</div>
+								<div class="hide-for-small-only medium-6 cell">
+									<div class="objective">
+										<div class="subheader">Objective</div>
+										{{ course.objectives }}
+										<div class="subheader">Prerequisites</div>
+										<div class="prerequisites">{{ course.prerequisites }}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</section>
+	
+	<section class="grey international-students">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 cell">
+					<h5>Are you an international student?</h5>
+					<a href="#form" class="button">Apply Here</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--
+	<section>
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 medium-6 cell">
+					<img src="{{ entry.image3.one().url }}">
+				</div>
+				<div class="small-12 medium-6 cell">
+					<h2 class="services-title">Instructor Certifications</h2>
+					<div class="services">
+						{{ entry.body2 }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	-->
+	<section>
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 cell text-center">
+					<h3 class="subline color-gold">Our Fleet</h3>
+				</div>
+			</div>
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 cell">
+					
+					{% for this in craft.entries.section("fleet").all() %}
+						{% if loop.index%2 != 0 %}
+							<div class="info-block">
+								<div class="grid-x grid-padding-x align-middle">
+									<div class="small-12 medium-5 cell">
+										<div class="image plane">
+											<img src="{{ this.image.one().url }}">
+										</div>
+									</div>
+									<div class="small-12 medium-7 cell">
+										<div class="info-text">
+											<h2>{{ this.title }}</h2>
+											<div class="line"></div>
+											{{ this.body }}
+											<a class="button" target="_blank" href="{{ this.planeLink }}">Read More</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% else %}
+							<div class="info-block">
+								<div class="grid-x grid-padding-x align-middle">
+									<div class="small-12 show-for-small-only cell">
+										<div class="image plane">
+											<img src="{{ this.image.one().url }}">
+										</div>
+									</div>
+									<div class="small-12 medium-7 cell">
+										<div class="info-text">
+											<h2>{{ this.title }}</h2>
+											<div class="line"></div>
+											{{ this.body }}
+											<a class="button" target="_blank" href="{{ this.planeLink }}">Read More</a>
+										</div>
+									</div>
+									<div class="hide-for-small-only medium-5 cell">
+										<div class="image plane">
+											<img src="{{ this.image.one().url }}">
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+															
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	{% for this in entry.callToAction.all() %}
+	<section>
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 cell">
+					
+					<div class="call-to-action" style="background: url({{ this.background.one().url }}) center center no-repeat;">
+						<div class="content">
+							<div class="subheader">{{ this.subHeader }}</div>
+							<h3 class="subline">{{ this.header }}</h3><br>
+							{% if this.linkUrl != "" %}
+							<a href="{{ this.linkUrl }}" class="button">{{ this.linkText }}</a>
+							{% endif %}
+						</div>
+						<div class="white overlay"></div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	{% endfor %}
+	
+	<section class="almost-full-grey" id="form">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x align-center">
+				<div class="small-11 medium-10 cell">
+					
+					<div class="form-block">
+						<div class="grid-x grid-padding-x">
+							<div class="small-12 cell text-center">
+								<h5 class="color-gold">Apply For Flight School</h5>
+							</div>
+						</div>
+						<form method="post" action="" accept-charset="UTF-8">
+							{{ csrfInput() }}
+							<input type="hidden" name="toEmail" value="{{ 'flightschool@okav.co'|hash }}">
+							<input type="hidden" name="action" value="contact-form/send">
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message[Name]" required placeholder="Name*" />
+								</div>
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message[Company]" placeholder="Company" />
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="fromEmail" required placeholder="Email*" />
+								</div>
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message[Phone]" placeholder="Phone*" />
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message[Interested_Course]" placeholder="Interested Course" />
+								</div>
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message[How_did_you_hear_about_us]" placeholder="How did you hear about us?" />
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 cell">
+									<label>
+										Additional Comments:
+										<textarea name="message[body]"></textarea>
+									</label>
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 cell text-center">
+									<button type="submit" class="button">Send Message</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

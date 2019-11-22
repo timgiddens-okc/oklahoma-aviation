@@ -1,0 +1,182 @@
+{% extends "_layout" %}
+{% set callToAction = "yes" %}
+{% set active = "Sales" %}
+{% block content %}
+<a class="button inner-sales hide-for-small-only" href="{{ siteUrl }}sales#inventory">Back to Sales</a>
+	{% for this in craft.entries.section('sales').all() %}
+	<div class="banner inventory" style="background: url({{ this.banner.one().url }}) center center no-repeat;">
+		<div class="banner-content">		
+			<h3>{{ entry.title }}</h3>
+		</div>
+	</div>
+	{% endfor %}
+	
+	<section>
+		<div class="grid-container">
+			
+			{% for this in entry.infoBlocks.all() %}
+				{% if loop.index%2 != 0 %}
+					<div class="info-block {{ (loop.first) ? 'no-margin-top' : '' }}">
+						<div class="grid-x grid-padding-x align-middle">
+							<div class="show-for-small-only small-12 cell">
+								{% if this.image|length > 1 %}
+									<div class="image">
+										<div class="slideshow">
+											{% for image in this.image.all() %}
+											<div><img src="{{ image.getUrl('threefour') }}"></div>
+											{% endfor %}
+										</div>
+									</div>
+								{% else %}
+									<div class="image"><img src="{{ this.image.one().getUrl('threefour') }}"></div>
+								{% endif %}
+							</div>
+							<div class="small-12 medium-6 cell">
+								<div class="info-text">
+									<div class="subheader">{{ this.subHeader }}</div>
+									<h2>{{ this.header }}</h2>
+									<div class="line"></div>
+									{{ this.text }}
+									{% if this.linkText != "" %}
+									<div class="text-right">
+										<a href="{{ siteUrl }}{{ this.linkUrl }}" class="button">{{ this.linkText }}</a>
+									</div>
+									{% endif %}
+								</div>
+							</div>
+							<div class="hide-for-small-only medium-6 cell">
+								{% if this.image|length > 1 %}
+									<div class="image">
+										<div class="slideshow">
+											{% for image in this.image.all() %}
+											<div><img src="{{ image.getUrl('threefour') }}"></div>
+											{% endfor %}
+										</div>
+									</div>
+								{% else %}
+									<div class="image"><img src="{{ this.image.one().getUrl('threefour') }}"></div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				{% else %}
+					
+					<div class="info-block {{ (loop.first) ? 'no-margin-top' : '' }}">
+						<div class="grid-x grid-padding-x">
+							<div class="small-12 medium-5 cell">
+								{% if this.image|length > 1 %}
+									<div class="image">
+										<div class="slideshow">
+											{% for image in this.image.all() %}
+											<div><img src="{{ image.getUrl('square') }}"></div>
+											{% endfor %}
+										</div>
+									</div>
+								{% else %}
+									<div class="image hide-for-small-only"><img src="{{ this.image.one().url }}"></div>
+									<div class="image show-for-small-only"><img src="{{ this.image.one().getUrl('square') }}"></div>
+								{% endif %}								
+							</div>
+							<div class="small-12 medium-7 cell">
+								<div class="info-text top-space">
+									<div class="subheader">{{ this.subHeader }}</div>
+									<h2>{{ this.header }}</h2>
+									<div class="line"></div>
+									{{ this.text }}
+									{% if this.linkText != "" %}
+									<div class="text-right">
+										<a href="{{ siteUrl }}{{ this.linkUrl }}" class="button">{{ this.linkText }}</a>
+									</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+			
+				{% endif %}
+			{% endfor %}
+			
+			<div class="info-block">
+				<div class="grid-x grid-padding-x align-middle">
+					<div class="small-12 medium-7 cell">
+						<div class="info-text">
+							<h2>Additional Details</h2>
+							<div class="line"></div>
+							{{ entry.additionalDetails }}
+						</div>
+					</div>
+					<div class="small-12 medium-5 cell text-center">
+						{% for this in entry.maintenanceRecords.all() %}
+						<a href="{{ this.file.one().url }}" class="button" target="_blank">{{ this.recordName }}</a>
+						{% endfor %}
+					</div>
+					<div class="small-12 cell hide-for-medium">
+						<a class="button inner-sales" href="{{ siteUrl }}sales#inventory">Back to Sales</a>
+					</div>
+				</div>
+			</div>
+						
+		</div>
+	</section>
+	
+	<section class="grey no-padding-top fleet">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				{% for this in entry.iconBlocks %}
+				<div class="small-12 medium-4 cell text-center">
+					<div class="info-text">
+						{% if this.icon.one() is not null %}
+						<div class="icon {{ (loop.index > 3) ? 'no-pull-up' : '' }}" style="background: url({{ this.icon.one().url }}) center center no-repeat;"></div>
+						{% else %}
+						<div class="icon {{ (loop.index > 3) ? 'no-pull-up' : '' }}"></div>
+						{% endif %}
+						<h2>{{ this.header }}</h2>
+						{{ this.text }}
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+	
+	<section>
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x align-center">
+				<div class="small-11 medium-12 cell">
+					<div class="charter-info">
+						<div class="grid-x">
+							
+							{% for this in entry.detailBlocks.all() %}
+							<div class="small-12 medium-4 cell">
+								<div class="charter-hover">
+									<div class="image"></div>
+									<div class="title">{{ this.header }}</div>
+									<div class="text">{{ this.text }}</div>
+								</div>
+							</div>
+							{% endfor %}
+					
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section>
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 medium-6 cell">
+					<div class="service-image"><img src="{{ entry.image.one().url }}"></div>
+				</div>
+				<div class="small-12 medium-6 cell">
+					<h2 class="services-title">Additional Equipment</h2>
+					<div class="services">
+						{{ entry.body2 }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

@@ -1,0 +1,216 @@
+{% extends "_layout" %}
+{% set callToAction = "no" %}
+{% set active = "Charter" %}
+{% block content %}
+
+	<div class="banner charter -animation-trigger" style="background: url({{ entry.banner.one().url }}) center center no-repeat;">
+		<div class="banner-content">
+			<h3 class="white fade-up">{{ entry.bannerHeader|nl2br }}</h3>
+			<h4 class="white fade-up transition-delay-2">{{ entry.bannerSubHeader|nl2br }}</h4>
+			<div class="scroll-down white fade-down transition-delay-6"></div>
+		</div>
+		<div class="overlay"></div>
+	</div>
+	
+	<section>
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x -animation-trigger">
+				<div class="small-12 cell">
+					<div class="subheader fade-up">Charter</div>
+					<h2 class="fade-up transition-delay-2">Benefits of Chartering</h2>
+					<div class="line short inline fade-up clip-path-right transition-delay-3"></div>
+				</div>
+			</div>
+			<div class="grid-x grid-padding-x align-center">
+				<div class="small-11 medium-12 cell">
+					<div class="charter-info -animation-trigger fade-up">
+						<div class="grid-x">
+							{% set counter = 0 %}
+							{% for this in entry.benefits.all() %}
+							<div class="small-12 medium-4 cell">
+								<div class="charter-hover">
+									<div class="image" style="background: url({{ this.image.one().url }}) center center no-repeat;"><div class="overlay"></div></div>
+									<div class="title">{{ this.header }}</div>
+									<div class="text">{{ this.text|nl2br }}</div>
+								</div>
+							</div>
+							{% set counter = counter + 2 %}
+							{% endfor %}
+					
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section>
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 cell text-center">
+					<h3 class="subline color-gold">{{ entry.header }}</h3>
+				</div>
+			</div>
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 cell values">
+					
+					{% for this in entry.outlinedInfoBoxes.all() %}
+						{% if loop.index%2 != 0 %}
+							<div class="info-block value -animation-trigger grow-before-y">
+								<div class="grid-x grid-padding-x align-middle">
+									<div class="small-12 medium-5 cell text-center medium-text-right">
+										<div class="circle clip-path-up shrink" style="background: url({{ this.image.one().url }}) center center no-repeat; background-size: cover;"></div>
+									</div>
+									<div class="small-12 medium-7 cell">
+										<div class="info-text">
+											<h2 class="fade-up transition-delay-4">{{ this.header }}</h2>
+											<div class="line fade-up transition-delay-5"></div>
+											<div class="fade-up transition-delay-7">
+												{{ this.text }}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% else %}
+							<div class="info-block value -animation-trigger grow-before-y">
+								<div class="grid-x grid-padding-x align-middle">
+									<div class="show-for-small-only small-12 cell text-center">
+										<div class="circle" style="background: url({{ this.image.one().url }}) center right no-repeat; background-size: cover;"></div>
+									</div>
+									<div class="small-12 medium-7 cell">
+										<div class="info-text">
+											<h2 class="fade-up transition-delay-4">{{ this.header }}</h2>
+											<div class="line fade-up transition-delay-5"></div>
+											<div class="fade-up transition-delay-7">
+												{{ this.text }}
+											</div>
+										</div>
+									</div>
+									<div class="hide-for-small-only medium-5 cell text-left">
+										<div class="circle clip-path-up shrink" style="background: url({{ this.image.one().url }}) center right no-repeat; background-size: cover;"></div>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="grey fleet no-pullup -animation-trigger">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 cell">
+					<h3 class="text-center color-gold">Fleet</h3>
+				</div>
+				{% set counter = 0 %}
+				{% for this in entry.iconBlocks %}
+				<div class="small-12 medium-4 cell fade-up transition-delay-{{ counter }}">
+					<a target="_blank" href="{{ this.planeUrl }}" class="info-text">
+						<img src="{{ this.icon.one().getUrl('threefour') }}" />
+						<h2>{{ this.header }}</h2>
+						<div class="line"></div>
+						{{ this.text }}
+					</a>
+				</div>
+				{% set counter = counter + 2 %}
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+	
+	{% for this in entry.callToAction.all() %}
+	<section class="quote-cta">
+		<div class="grid-container -animation-trigger clip-path-up shrink">
+			<div class="grid-x small-padding-collapse grid-padding-x">
+				<div class="small-12 cell">
+					
+					<div class="call-to-action" style="background: url({{ this.background.one().url }}) center center no-repeat;">
+						<div class="content">
+							<div class="subheader white fade-up">{{ this.subHeader }}</div>
+							<h3 class="subline white fade-up transition-delay-2">{{ this.header }}</h3>
+							{% if this.linkUrl != "" %}
+							<br><a href="{{ this.linkUrl }}#form" class="button white fade-up transition-delay-4">{{ this.linkText }}</a>
+							{% endif %}
+						</div>
+						<div class="overlay"></div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	{% endfor %}
+	
+{% macro errorList(errors) %}
+    {% if errors %}
+        <ul class="errors">
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+
+{% from _self import errorList %}
+	
+	<section class="almost-full-grey">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x align-center">
+				<div class="small-11 medium-12 cell -animation-trigger">
+					
+					<div class="form-block fade-up">
+						<div class="grid-x grid-padding-x">
+							<div class="small-12 cell text-center">
+								<h5 class="color-gold">Reach Out To Us</h5>
+								<p>Contact us today and speak with a representative.<br>(405) 787-4568</p>
+							</div>
+						</div>
+						<form method="post" action="" accept-charset="UTF-8">
+							{{ csrfInput() }}
+							<input type="hidden" name="toEmail" value="{{ 'charter@okav.co'|hash }}">
+							<input type="hidden" name="action" value="contact-form/send">
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message[Name]" required placeholder="Name*" />
+								</div>
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message[Company]" placeholder="Company" />
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="fromEmail" required placeholder="Email*" />
+								</div>
+								<div class="hide">
+									<input type="text" name="fromEmailDuplicate" placeholder="Email*" />
+								</div>
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message[Phone]" required placeholder="Phone*" />
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 cell">
+									<label>
+										Additional Comments:
+										<textarea name="message[body]"></textarea>
+									</label>
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 cell text-center">
+									<button type="submit" class="button">Send Message</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

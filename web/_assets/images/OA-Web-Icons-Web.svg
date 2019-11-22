@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 116.08 116.08">
+  <title>Asset 3</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <circle cx="58.04" cy="58.04" r="58.04" fill="#a18038"></circle>
+      <path d="M87.89,80.4H28.19V35.68h59.7ZM29.66,78.93H86.42V37.15H29.66Z" fill="#fff"></path>
+      <rect x="28.93" y="43.59" width="58.23" height="1.47" fill="#fff"></rect>
+      <rect x="38.61" y="53.18" width="38.87" height="1.47" fill="#fff"></rect>
+      <rect x="38.61" y="58.32" width="38.87" height="1.47" fill="#fff"></rect>
+      <rect x="38.61" y="63.46" width="38.87" height="1.47" fill="#fff"></rect>
+      <rect x="38.61" y="68.61" width="28.55" height="1.47" fill="#fff"></rect>
+      <circle cx="32.82" cy="40.37" r="1.01" fill="#fff"></circle>
+      <circle cx="36.68" cy="40.37" r="1.01" fill="#fff"></circle>
+      <circle cx="40.53" cy="40.37" r="1.01" fill="#fff"></circle>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,105 @@
+{% extends "_layout" %}
+{% set callToAction = "yes" %}
+{% set active = "About Us" %}
+{% block content %}
+
+	<div class="banner -animation-trigger" style="background: url({{ entry.banner.one().url }}) center center no-repeat;">
+		<div class="banner-content">
+			<h5 class="white">Our Mission</h5>
+			<h4 class="white fade-up">{{ entry.bannerHeader|nl2br }}</h4>
+			<div class="line white short fade-up transition-delay-2"></div>
+			<div class="scroll-down white fade-down transition-delay-6"></div>
+		</div>
+		<div class="overlay"></div>
+	</div>
+	
+	<section class="values-section">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x -animation-trigger">
+				<div class="small-12 cell text-center">
+					<h3 class="subline color-gold fade-up">{{ entry.header }}</h3>
+					<div class="grid-x grid-padding-x align-center">
+						<div class="small-12 medium-7 cell fade-up transition-delay-2">
+							{{ entry.body }}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 cell values">
+					
+					{% for this in entry.outlinedInfoBoxes.all() %}
+						{% if loop.index%2 != 0 %}
+							<div class="info-block value -animation-trigger grow-before-y">
+								<div class="grid-x grid-padding-x align-middle">
+									<div class="small-12 medium-5 cell text-center medium-text-right">
+										<div class="circle clip-path-up shrink" style="background: url({{ this.image.one().url }}) center center no-repeat;"></div>
+									</div>
+									<div class="small-12 medium-7 cell">
+										<div class="info-text">
+											<h2 class="fade-up transition-delay-4">{{ this.header }}</h2>
+											<div class="line fade-up transition-delay-5"></div>
+											<div class="fade-up transition-delay-7">
+												{{ this.text }}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% else %}
+							<div class="info-block value -animation-trigger grow-before-y">
+								<div class="grid-x grid-padding-x align-middle">
+									<div class="show-for-small-only small-12 cell text-center">
+										<div class="circle clip-path-up shrink" style="background: url({{ this.image.one().url }}) center center no-repeat;"></div>
+									</div>
+									<div class="small-12 medium-7 cell">
+										<div class="info-text">
+											<h2 class="fade-up transition-delay-4">{{ this.header }}</h2>
+											<div class="line fade-up transition-delay-5"></div>
+											<div class="fade-up transition-delay-7">
+												{{ this.text }}
+											</div>
+										</div>
+									</div>
+									<div class="hide-for-small-only medium-5 cell text-left">
+										<div class="circle clip-path-up shrink" style="background: url({{ this.image.one().url }}) center center no-repeat;"></div>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="grey staff">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x small-up-1 medium-up-3">
+				
+				{% for this in craft.entries.section('staff').all() %}
+				<div class="cell -animation-trigger">
+					<div class="person">
+						<h5 class="name color-gold fade-up">{{ this.title }}</h5>
+						<img src="{{ this.image.one().url }}" class="fade-up transition-delay-2">
+						<div class="title fade-up transition-delay-4">
+							<p>{{ this.jobTitle }}</p>
+							<div class="color-gold">{{ this.certification }}</div>
+						</div>
+						<div class="bio fade-up transition-delay-6">
+							{{ this.biographyShown }}
+						</div>
+						<div class="hidden-bio">
+							{{ this.biographyHidden }}
+						</div>
+						<a href="#" class="more fade-up transition-delay-8">More</a>
+					</div>
+				</div>
+				{% endfor %}
+					
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

@@ -1,0 +1,246 @@
+{% extends "_layout" %}
+{% set callToAction = "no" %}
+{% set active = "Sales" %}
+{% block content %}
+
+	<div class="banner sales -animation-trigger" style="background: url({{ entry.banner.one().url }}) center center no-repeat;">
+		<div class="banner-content">		
+			<h4 class="fade-up">{{ entry.bannerSubHeader }}</h4>
+			<h3 class="fade-up transition-delay-2">{{ entry.bannerHeader }}</h3>
+		</div>
+	</div>
+	
+	<section>
+		<div class="grid-container">
+			
+			{% for this in entry.infoBlocks.all() %}
+				{% if loop.index%2 == 0 %}
+					<div class="info-block {{ (loop.first) ? 'no-margin-top' : '' }} -animation-trigger">
+						<div class="grid-x grid-padding-x align-middle">
+							<div class="show-for-small-only small-12 cell">
+								{% if this.image|length > 1 %}
+									<div class="image fade-up shrink">
+										<div class="slideshow">
+											{% for image in this.image.all() %}
+											<div><img src="{{ image.getUrl('square') }}"></div>
+											{% endfor %}
+										</div>
+									</div>
+								{% else %}
+									<div class="image"><img class="fade-up shrink" src="{{ this.image.one().getUrl('square') }}"></div>
+								{% endif %}
+							</div>
+							<div class="small-12 medium-7 cell">
+								<div class="info-text">
+									<div class="subheader fade-up">{{ this.subHeader }}</div>
+									<h2 class="fade-up transition-delay-2">{{ this.header }}</h2>
+									<div class="line fade-up transition-delay-4"></div>
+									<div class="fade-up transition-delay-6">
+										{{ this.text }}
+									</div>
+									{% if this.linkText != "" %}
+									<div class="text-right">
+										<a href="{{ siteUrl }}{{ this.linkUrl }}" class="button">{{ this.linkText }}</a>
+									</div>
+									{% endif %}
+								</div>
+							</div>
+							<div class="hide-for-small-only medium-5 cell">
+								{% if this.image|length > 1 %}
+									<div class="image clip-path-up shrink">
+										<div class="slideshow">
+											{% for image in this.image.all() %}
+											<div><img src="{{ image.getUrl('square') }}"></div>
+											{% endfor %}
+										</div>
+									</div>
+								{% else %}
+									<div class="image clip-path-up shrink"><img src="{{ this.image.one().getUrl('square') }}"></div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				{% else %}
+					
+					<div class="info-block {{ (loop.first) ? 'no-margin-top' : '' }} -animation-trigger">
+						<div class="grid-x grid-padding-x">
+							<div class="small-12 medium-5 cell">
+								{% if this.image|length > 1 %}
+									<div class="image clip-path-up shrink">
+										<div class="slideshow">
+											{% for image in this.image.all() %}
+											<div><img src="{{ image.getUrl('square') }}"></div>
+											{% endfor %}
+										</div>
+									</div>
+								{% else %}
+									<div class="image clip-path-up shrink hide-for-small-only"><img src="{{ this.image.one().url }}"></div>
+									<div class="image clip-path-up shrink show-for-small-only"><img src="{{ this.image.one().getUrl('square') }}"></div>
+								{% endif %}								
+							</div>
+							<div class="small-12 medium-7 cell">
+								<div class="info-text top-space">
+									<div class="subheader fade-up">{{ this.subHeader }}</div>
+									<h2 class="fade-up transition-delay-2">{{ this.header }}</h2>
+									<div class="line fade-up transition-delay-4"></div>
+									<div class="fade-up transition-delay-6">
+										{{ this.text }}
+									</div>
+									{% if this.linkText != "" %}
+									<div class="text-right">
+										<a href="{{ siteUrl }}{{ this.linkUrl }}" class="button">{{ this.linkText }}</a>
+									</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+			
+				{% endif %}
+			{% endfor %}
+						
+		</div>
+	</section>
+	
+	<section class="no-padding-top -animation-trigger">
+		<div class="grid-x align-stretch">
+			<div class="small-2 hide-for-small-only large-6 cell">
+				<div class="sales-image clip-path-up shrink" style="background: url({{ entry.image.one().url }}) center center no-repeat;"></div>
+			</div>
+			<div class="small-10 medium-6 cell">
+				
+				{% for this in entry.values %}
+				<div class="value-block -animation-trigger grow-before-x">
+					<div class="subheader fade-up transiton-delay-5">{{ this.subHeader }}</div>
+					<h2 class="fade-up transition-delay-7">{{ this.header }}</h2>
+					<div class="fade-up transition-delay-9">
+						{{ this.text }}
+					</div>
+				</div>
+				{% endfor %}
+				
+			</div>
+		</div>
+	</section>
+	
+	<section class="-animation-trigger" id="inventory">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 cell">
+					<h2 class="fade-up transition-delay-1">Our Inventory</h2>
+					<div class="line short inline fade-up clip-path-right transition-delay-2"></div>
+					
+					{% for this in craft.entries.section('inventory') %}
+						{% if this.sold != 1 %}
+							{% for thisBlock in this.infoBlocks.limit(1).all() %}
+							<div class="info-block {{ (loop.first) ? 'no-margin-top' : '' }} -animation-trigger">
+								<div class="grid-x grid-padding-x">
+									<div class="small-12 medium-5 cell">
+											<div class="image clip-path-up shrink"><img src="{{ thisBlock.image.one().getUrl('threefour') }}"></div>							
+									</div>
+									<div class="small-12 medium-7 cell">
+										<div class="info-text top-space">
+											<h2 class="fade-up transition-delay-2">{{ this.title }}</h2>
+											<div class="line fade-up transition-delay-4"></div>
+											<div class="fade-up transition-delay-6">
+												{{ thisBlock.text }}
+											</div>
+											<div class="text-right">
+												<a href="{{ this.url }}" class="button fade-up transition-delay-7">Additional Information</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="no-padding-top -animation-trigger">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 cell text-center">
+					<h2 class="fade-up transition-delay-1">Recent Transactions</h2>
+					<div class="line short inline fade-up clip-path-right transition-delay-2"></div>
+					
+					<div class="grid-x grid-padding-x small-up-1 medium-up-3">
+					{% for this in craft.entries.section('inventory') %}
+						{% if this.sold == 1 %}
+							<div class="cell text-center fade-up transition-delay-3"><p>{{ this.title }}</p></div>						
+						{% endif %}
+					{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="almost-full-grey">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x align-center">
+				<div class="small-11 medium-12 cell -animation-trigger">
+					
+					<div class="form-block fade-up">
+						<div class="grid-x grid-padding-x">
+							<div class="small-12 cell text-center">
+								<h5 class="color-gold">{{ entry.header }}</h5>
+								<p>{{ entry.subHeader }}<br>(405) 787-4568</p>
+							</div>
+						</div>
+						<form method="post" action="" accept-charset="UTF-8">
+							{{ csrfInput() }}
+							<input type="hidden" name="toEmail" value="{{ 'sales@okav.co'|hash }}">
+							<input type="hidden" name="action" value="contact-form/send">
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message[Name]" required placeholder="Name*" />
+								</div>
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message{Company]" required placeholder="Company" />
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="fromEmail" required placeholder="Email*" />
+								</div>
+								<div class="hide">
+									<input type="text" name="fromEmailDuplicate" placeholder="Repeat Email" />
+								</div>
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message{Phone]" required placeholder="Phone*" />
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="Message[Aircraft_Make]" placeholder="Aircraft Make" />
+								</div>
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="Message[Aircraft_Model]" placeholder="Aircraft Model" />
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 cell">
+									<label>
+										Additional Comments:
+										<textarea name="message[body]"></textarea>
+									</label>
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 cell text-center">
+									<button type="submit" class="button">Send Message</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

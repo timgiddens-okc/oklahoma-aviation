@@ -1,0 +1,75 @@
+{% extends "_layout" %}
+{% set callToAction = "gold" %}
+{% set active = "Contact Us" %}
+{% block content %}
+
+	<section class="contact" style="background: url({{ entry.banner.one().url }}) center center no-repeat;">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 cell text-center">
+					<h3 class="subline white">{{ entry.bannerHeader|nl2br }}</h3>
+					<div class="grid-x">
+						<div class="small-12 medium-6 cell">
+							{{ companyInformation.contactInformation }}
+						</div>
+						<div class="small-12 medium-6 cell">
+							<p>Flight School<br><a href="https://www.google.com/maps/place/5901+Philip+J+Rhoads+Ave+%23207,+Bethany,+OK+73008/@35.530267,-97.642967,17z/data=!3m1!4b1!4m5!3m4!1s0x87b205108c50ff7b:0x4dd45251b54b8e53!8m2!3d35.530267!4d-97.640773">5901 Philip J Rhoads Ave #207<br>Bethany, OK, 73008</a></p>
+						</div>
+					</div>
+					<div class="scroll-down white"></div>
+				</div>
+			</div>
+		</div>
+		<div class="overlay"></div>
+	</section>
+	
+	<section class="contact-form">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x align-center">
+				<div class="small-12 medium-9 cell">
+
+						<div class="grid-x grid-padding-x">
+							<div class="small-12 cell text-center">
+								<h5 class="color-gold">{{ entry.header }}</h5>
+							</div>
+						</div>
+						<form method="post" action="" accept-charset="UTF-8">
+							{{ csrfInput() }}
+							<input type="hidden" name="action" value="contact-form/send">
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message[Name]" placeholder="Name*" />
+								</div>
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="fromEmail" placeholder="Email*" />
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message[How_did_you_hear_about_us]" placeholder="How did you hear about us?" />
+								</div>
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message[Phone]" placeholder="Phone*" />
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 cell">
+									<label>
+										Let us know how we can help:
+										<textarea name="message[body]"></textarea>
+									</label>
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 cell text-center">
+									<button type="submit" class="button">Send Message</button>
+								</div>
+							</div>
+						</form>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

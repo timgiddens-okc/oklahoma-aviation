@@ -1,0 +1,134 @@
+{% extends "_layout" %}
+{% set callToAction = "yes" %}
+{% set active = "Management" %}
+{% block content %}
+
+	<div class="banner management" style="background: url({{ entry.banner.one().url }}) center center no-repeat;">
+		<div class="banner-content">		
+			<h3 class="white">{{ entry.bannerHeader|nl2br }}</h3>
+		</div>
+	</div>
+	
+	<section class="management-intro">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x align-center">
+				<div class="small-12 medium-6 cell">
+					{{ entry.body }}
+				</div>
+			</div>
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 cell text-center">
+					<h4>{{ entry.header }}</h4>
+				</div>
+			</div>
+			<div class="grid-x grid-padding-x align-center">
+				<div class="small-12 medium-6 cell">
+					{{ entry.body2 }}
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="grey no-padding-top fleet">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				{% for this in entry.iconBlocks %}
+				<div class="small-12 medium-4 cell">
+					<div class="info-text">
+						{% if this.icon.one() is not null %}
+						<div class="icon" style="background: url({{ this.icon.one().url }}) center center no-repeat;"></div>
+						{% else %}
+						<div class="icon"></div>
+						{% endif %}
+						<div class="subheader">{{ this.subHeader }}</div>
+						<h2>{{ this.header|nl2br }}</h2>
+						<div class="line"></div>
+						{{ this.text }}
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+	
+	<section>
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="small-12 medium-6 cell">
+					<div class="service-image"><img src="{{ entry.image.one().url }}"></div>
+				</div>
+				<div class="small-12 medium-6 cell">
+					<h2 class="services-title">Services Provided</h2>
+					<div class="services">
+						{{ entry.services }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="almost-full-grey">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x align-center">
+				<div class="small-11 medium-12 cell -animation-trigger">
+					
+					<div class="form-block fade-up">
+						<div class="grid-x grid-padding-x">
+							<div class="small-12 cell text-center">
+								<h5 class="color-gold">Reach Out To Us</h5>
+								<p>Contact us today and speak with a representative.<br>(405) 787-4568</p>
+							</div>
+						</div>
+						<form method="post" action="" accept-charset="UTF-8">
+							{{ csrfInput() }}
+							<input type="hidden" name="toEmail" value="{{ 'info@okav.co'|hash }}">
+							<input type="hidden" name="action" value="contact-form/send">
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message[Name]" required placeholder="Name*" />
+								</div>
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message{Company]" required placeholder="Company" />
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="fromEmail" required placeholder="Email*" />
+								</div>
+								<div class="hide">
+									<input type="text" name="fromEmailDuplicate" placeholder="Repeat Email" />
+								</div>
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="message{Phone]" required placeholder="Phone*" />
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="Message[Aircraft_Make]" placeholder="Aircraft Make" />
+								</div>
+								<div class="small-12 medium-6 cell">
+									<input type="text" name="Message[Aircraft_Model]" placeholder="Aircraft Model" />
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 cell">
+									<label>
+										Additional Comments:
+										<textarea name="message[body]"></textarea>
+									</label>
+								</div>
+							</div>
+							<div class="grid-x grid-padding-x">
+								<div class="small-12 cell text-center">
+									<button type="submit" class="button">Send Message</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

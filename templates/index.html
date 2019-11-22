@@ -1,0 +1,135 @@
+{% extends "_layout" %}
+{% set callToAction = "yes" %}
+{% set active = "Home" %}
+{% block content %}
+
+	<div class="banner -animation-trigger" style="background: url({{ entry.banner.one().url }}) center center no-repeat;">
+		<div class="banner-content">
+			<div class="tagline fade-up"><img src="{{ siteUrl }}_assets/images/tagline.svg"></div>
+			<div class="scroll-down fade-down transition-delay-3"></div>
+		</div>
+	</div>
+	
+	<section>
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x -animation-trigger">
+				<div class="small-12 cell">
+					<div class="soulbird-logo fade-up">Soulbird</div>
+					
+					<div class="sub-nav gold hide-for-small-only fade-up">
+						<div class="grid-x align-justify">
+							<div class="auto cell fade-up transition-delay-2">Jet Charter</div>
+							<div class="auto cell text-center fade-up transition-delay-4">Aircraft Sales</div>
+							<div class="auto cell text-right fade-up transition-delay-6">Management</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			{% for this in entry.infoBlocks.all() %}
+				{% if loop.index%2 != 0 %}
+					<div class="info-block -animation-trigger">
+						<div class="grid-x grid-padding-x align-middle">
+							<div class="small-12 show-for-small-only cell">
+								<div class="image"><img src="{{ this.image.one().getUrl('square') }}"  class="fade-up shrink"></div>
+							</div>
+							<div class="small-12 medium-6 cell">
+								<div class="info-text">
+									<div class="subheader fade-up">{{ this.subHeader }}</div>
+									<h2 class="fade-up transition-delay-2">{{ this.header }}</h2>
+									<div class="line clip-path-right fade-up transition-delay-2"></div>
+									<div class="fade-up transition-delay-5">
+									{{ this.text }}
+									</div>
+									{% if this.linkText != "" %}
+									<div class="text-right fade-up transition-delay-7">
+										<a href="{{ siteUrl }}{{ this.linkUrl }}" class="button">{{ this.linkText }}</a>
+									</div>
+									{% endif %}
+								</div>
+							</div>
+							<div class="hide-for-small-only medium-6 cell">
+								<div class="image"><img class="fade-up shrink" src="{{ this.image.one().url }}"></div>
+							</div>
+						</div>
+					</div>
+				{% else %}
+					
+					<div class="info-block -animation-trigger">
+						<div class="grid-x grid-padding-x">
+							<div class="small-12 medium-6 cell">
+								<div class="image hide-for-small-only"><img src="{{ this.image.one().url }}" class="fade-up shrink" /></div>
+								<div class="image show-for-small-only"><img src="{{ this.image.one().getUrl('square') }}" class="fade-up shrink" /></div>
+							</div>
+							<div class="small-12 medium-6 cell">
+								<div class="info-text top-space">
+									<div class="subheader fade-up">{{ this.subHeader }}</div>
+									<h2 class="fade-up transition-delay-2">{{ this.header }}</h2>
+									<div class="line clip-path-right fade-up transition-delay-2"></div>
+									<div class="fade-up transition-delay-5">
+									{{ this.text }}
+									</div>
+									{% if this.linkText != "" %}
+									<div class="text-right fade-up transition-delay-7">
+										<a href="{{ siteUrl }}{{ this.linkUrl }}" class="button">{{ this.linkText }}</a>
+									</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+			
+				{% endif %}
+			{% endfor %}
+			
+		</div>
+	</section>
+	
+	<section class="grey">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x align-center">
+				<div class="small-11 medium-10 cell -animation-trigger text-center">
+					<h4 class="fade-up subheader-tall">Flight School</h4>
+					<h3 class="subline color-gold spacer fade-up transition-delay-2">Pilot Your Own Aircraft</h3>
+					<div class="home-courses fade-up transition-delay-3">
+						<div class="grid-x -animation-trigger">
+							{% set counter = 1 %}
+							{% for this in entry.courses.all() %}
+							<div class="small-12 medium-4 cell">
+								<div class="detail-hover">
+									<div class="overlay"></div>
+									<div class="image" style="background: url({{ this.background.one().url }}) center center no-repeat;"></div>
+									<div class="title">{{ this.header }}</div>
+									<a href="{{ this.linkUrl }}" class="button white">{{ this.linkText }}</a>
+								</div>
+							</div>
+							{% set counter = counter + 1 %}
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="certifications -animation-trigger">
+			<div class="hide-for-small-only">
+				<div class="grid-x grid-padding-x">
+					<div class="small-12 cell text-center">
+						{% for this in entry.certifications.all() %}
+						<img class="fade-up transition-delay-{{ loop.index+1 }}" src="{{ this.url }}">
+						{% endfor %}
+						
+					</div>
+				</div>
+			</div>
+			<div class="show-for-small-only">
+				<div class="grid-x grid-padding-x small-up-2 align-center">
+					{% for this in entry.certifications.all() %}
+						<div class="cell text-center"><img src="{{ this.url }}"></div>
+					{% endfor %}
+				</div>
+			</div>
+	</section>
+
+{% endblock %}
